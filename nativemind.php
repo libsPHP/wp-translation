@@ -1,39 +1,51 @@
 <?php
 /**
- * Plugin Name: NativeMind Plugin
- * Description: NativeMind plugin to handle post translations and other functions.
- * Version: 1.0
+ * @package NativeMindPlugin
+ * @version 1.0
+ * 
+ * Plugin Name: NativeMind Plugin.
+ * Plugin URI: https://nativemind.net
+ * Description: Enhances WordPress with advanced translation capabilities and menu management.
+ * Version: 1.0.0
  * Author: NativeMind.net (Anton Dodonov)
+ * Author URI: https://nativemind.net
+ * Text Domain: nativemind
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit; // Don't access directly.
 };
 
-// Подключение файла функций
-//include_once __DIR__ . 'include/functions.php';
-
-// Подключение файла переводов
-//include_once __DIR__ . 'include/translations.php';
-
 require "i18n.php";
 require "cache.php";
-
 require "translateTextGoogle.php";
 
-
+/**
+ * Class NativeMind
+ *
+ * Main class for the NativeMind plugin. Handles post translations, menu item translations,
+ * and other related functionalities.
+ */
 class NativeMind {
+    /**
+     * NativeMind constructor.
+     *
+     * Initializes the plugin, adds necessary filters for content and menu translations.
+     */
     public function __construct() {
-/*
-        if (is_plugin_active('polylang/polylang.php')) {
-            // Ваш код
-        }
-*/
         add_filter('the_content', array($this, 'handle_post_translation'));
-        // Добавление фильтра для элементов меню
         add_filter('wp_get_nav_menu_items', array($this, 'translate_menu_items'), 20, 3);
     }
 
+    /**
+     * Extract Emoji from string.
+     *
+     * Extracts an emoji character from the beginning of a given string.
+     *
+     * @param string $title The string to extract the emoji from.
+     *
+     * @return string The extracted emoji character or an empty string if no emoji is found.
+     */
 function get_emoji($title) {
     // Регулярное выражение для поиска эмоджи
     $emoji_regex = '/[\x{1F600}-\x{1F64F}\x{1F300}-\x{1F5FF}\x{1F680}-\x{1F6FF}\x{1F700}-\x{1F77F}\x{1F780}-\x{1F7FF}\x{1F800}-\x{1F8FF}\x{1F900}-\x{1F9FF}\x{1FA00}-\x{1FA6F}\x{1FA70}-\x{1FAFF}\x{2600}-\x{26FF}\x{2700}-\x{27BF}]/u';
@@ -48,6 +60,20 @@ function get_emoji($title) {
     return "";
 }
 
+    /**
+     * Translate Menu Items.
+     *
+     * Translates menu items, including category titles and special placeholders like #LANGUAGE#.
+     * This method handles the translation of menu items, particularly those that are categories.
+     * It checks for translated category names and replaces placeholders like #LANGUAGE# with
+     * the appropriate language information.
+     *
+     * @param array $items The menu items to translate.
+     * @param stdClass $menu The menu object.
+     * @param array $args Additional arguments passed to the menu.
+     *
+     * @return array The translated menu items.
+     */
     public function translate_menu_items($items, $menu, $args) {
 	global $nm_languages,$nm_i18n;
         foreach ($items as &$item) {
@@ -94,13 +120,26 @@ function get_emoji($title) {
         return $items;
     }
 
-
+    /**
+     * Handle Post Translation.
+     *
+     * Manages the translation of post content. It retrieves the post content in the default language,
+     * attempts to retrieve a cached translation for the current language, and if no translation is found,
+     * translates the content and caches it for future use.
+     *
+     * @param string $content The original content of the post.
+     *
+     * @return string The translated content, or the original content if no translation is available.
+     */
     public function handle_post_translation($content) {
+        // Get the post ID
         $post_id = get_the_ID();
     
+        // Get the current and default languages
         $current_language = pll_current_language();
         $default_language = pll_default_language();
     
+        // Get the cache folder path
         $cache_folder_path = get_cache_folder_path();
 
         $blog_id = get_current_blog_id();
@@ -134,12 +173,24 @@ function get_emoji($title) {
         }
 	return $content;
     }
-
     
-    // Функция перевода (примерная структура)
+    /**
+     * Translate.
+     *
+     * Translates the given content from one language to another. This method currently uses
+     * Google Translate to perform the translation.
+     *
+     * @param string $content The content to be translated.
+     * @param string $language_from The language code of the original content.
+     * @param string $language_to The language code to translate the content into.
+     *
+     * @return string The translated content, or an empty string if the content could not be translated.
+     */
     function translate($content, $language_from, $language_to) {
-        // Логика перевода
-        // Возвращаем переведенный контент
+        /**
+         *  Translation logic
+         *  Return translated content
+         */
 	//return "TEST2";
 
 	$content=translateTextGoogle_nocache($content,$language_to);
