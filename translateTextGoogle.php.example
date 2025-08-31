@@ -1,6 +1,13 @@
 <?php
 
 /**
+ * Template file for Google Translate API configuration.
+ * Copy this file to translateTextGoogle.php and add your API key.
+ * 
+ * SECURITY WARNING: Never commit translateTextGoogle.php with real API keys to version control.
+ */
+
+/**
  * Translates text using the Google Translate API without caching.
  *
  * @param string $text The text to translate.
@@ -69,10 +76,10 @@ function translateTextGoogle($text, $targetLanguage) {
     // Проверяем, существует ли закешированный файл
     if (file_exists($cache_file)) {
         // Если файл существует, возвращаем его содержимое
-        $cached=file_get_contents($cache_file);
+        $cached = file_get_contents($cache_file);
         echo ("from cache:");
         echo ($cached);
-      return $cached;
+        return $cached;
     } else {        
         $result = translateTextGoogle_nocache($text, $targetLanguage);
 
@@ -81,5 +88,3 @@ function translateTextGoogle($text, $targetLanguage) {
         return $result;
     }
 }
-
-//echo(translateTextGoogle("Hello","zh_CN"));

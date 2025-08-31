@@ -1,1 +1,59 @@
-/domains/my_domains.php
+# Composer
+/vendor/
+composer.lock
+
+# WordPress
+wp-config.php
+wp-content/uploads/
+wp-content/blogs.dir/
+wp-content/upgrade/
+wp-content/backup-db/
+wp-content/advanced-cache.php
+wp-content/wp-cache-config.php
+wp-content/cache/
+wp-content/cache/supercache/
+
+# Cache
+cache/
+*.cache
+
+# Logs
+*.log
+debug.log
+error_log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+
+# API Keys (security)
+translateTextGoogle.php.local
+config.local.php
+
+# Template files (should not be committed with real keys)
+translateTextGoogle.php
+
+# Testing
+/tests/_output/
+/coverage/
+.phpunit.result.cache
+
+# Node modules (if any)
+node_modules/
+package-lock.json

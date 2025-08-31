@@ -1,0 +1,100 @@
+{
+    "name": "nativemind/wp-translation",
+    "description": "Advanced WordPress translation plugin with Polylang integration, caching, and multisite support",
+    "type": "wordpress-plugin",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Anton Dodonov",
+            "email": "anton@nativemind.net",
+            "homepage": "https://nativemind.net"
+        }
+    ],
+    "keywords": [
+        "wordpress",
+        "translation",
+        "multilingual",
+        "polylang",
+        "cache",
+        "multisite",
+        "google-translate",
+        "i18n",
+        "l10n"
+    ],
+    "homepage": "https://nativemind.net",
+    "support": {
+        "issues": "https://github.com/nativemind/wp-translation/issues",
+        "source": "https://github.com/nativemind/wp-translation",
+        "docs": "https://nativemind.net/docs/wp-translation",
+        "email": "support@nativemind.net"
+    },
+    "require": {
+        "php": ">=7.4",
+        "ext-json": "*",
+        "ext-curl": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.0",
+        "squizlabs/php_codesniffer": "^3.6",
+        "wp-coding-standards/wpcs": "^2.3"
+    },
+    "suggest": {
+        "polylang/polylang": "Required for basic multilingual functionality",
+        "google/cloud-translate": "For enhanced Google Translate API integration"
+    },
+    "autoload": {
+        "files": [
+            "nativemind.php",
+            "i18n.php",
+            "cache.php",
+            "translateTextGoogle.php",
+            "include/functions.php",
+            "include/translations.php"
+        ],
+        "classmap": [
+            "."
+        ]
+    },
+    "autoload-dev": {
+        "classmap": [
+            "tests/"
+        ]
+    },
+    "scripts": {
+        "test": "phpunit",
+        "cs": "phpcs --standard=WordPress .",
+        "cs-fix": "phpcbf --standard=WordPress .",
+        "validate": [
+            "@cs",
+            "@test"
+        ]
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true,
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    },
+    "extra": {
+        "wordpress-plugin-slug": "nativemind-wp-translation",
+        "wordpress-plugin-header": {
+            "Plugin Name": "NativeMind WP Translation",
+            "Plugin URI": "https://nativemind.net",
+            "Description": "Advanced WordPress translation plugin with Polylang integration, caching, and multisite support",
+            "Version": "1.0.0",
+            "Author": "NativeMind.net (Anton Dodonov)",
+            "Author URI": "https://nativemind.net",
+            "Text Domain": "nativemind",
+            "Domain Path": "/languages",
+            "Network": false,
+            "Requires at least": "5.0",
+            "Tested up to": "6.4",
+            "Requires PHP": "7.4",
+            "License": "MIT",
+            "License URI": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
