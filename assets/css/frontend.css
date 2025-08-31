@@ -1,0 +1,146 @@
+/**
+ * NativeMind Frontend Styles
+ * 
+ * Styles for frontend functionality including language switchers,
+ * emoji support, and multilingual content display.
+ * 
+ * @package NativeLang
+ * @version 1.0.0
+ */
+
+/* Language Switcher Styles */
+.nativemind-language-switcher {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.nativemind-language-switcher ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.nativemind-language-switcher li {
+    margin: 0;
+    padding: 0;
+}
+
+.nativemind-language-switcher a {
+    display: inline-block;
+    padding: 5px 10px;
+    text-decoration: none;
+    border-radius: 3px;
+    background: #f0f0f0;
+    color: #333;
+    transition: all 0.3s ease;
+    font-size: 14px;
+}
+
+.nativemind-language-switcher a:hover {
+    background: #333;
+    color: #fff;
+}
+
+.nativemind-language-switcher .current-language a {
+    background: #0073aa;
+    color: #fff;
+    font-weight: bold;
+}
+
+/* Menu Emoji Support */
+.menu-item-emoji {
+    display: inline-block;
+    margin-right: 5px;
+    font-size: 1.1em;
+    vertical-align: middle;
+}
+
+/* RTL Language Support */
+.rtl .nativemind-language-switcher ul {
+    direction: rtl;
+}
+
+.rtl .menu-item-emoji {
+    margin-right: 0;
+    margin-left: 5px;
+}
+
+/* Translation Loading State */
+.nativemind-translating {
+    opacity: 0.7;
+    position: relative;
+}
+
+.nativemind-translating::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nativemind-translating::before {
+    content: '⟳';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    font-size: 20px;
+    animation: nm-spin 1s linear infinite;
+}
+
+@keyframes nm-spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .nativemind-language-switcher ul {
+        justify-content: center;
+    }
+    
+    .nativemind-language-switcher a {
+        padding: 8px 12px;
+        font-size: 16px;
+    }
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+    .nativemind-language-switcher a {
+        border: 2px solid #333;
+    }
+    
+    .nativemind-language-switcher a:hover,
+    .nativemind-language-switcher .current-language a {
+        border-color: #fff;
+    }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+    .nativemind-language-switcher a {
+        transition: none;
+    }
+    
+    .nm-spin {
+        animation: none;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .nativemind-language-switcher {
+        display: none;
+    }
+}
