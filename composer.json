@@ -23,8 +23,8 @@
     ],
     "homepage": "https://nativemind.net",
     "support": {
-        "issues": "https://github.com/nativemind/wp-translation/issues",
-        "source": "https://github.com/nativemind/wp-translation",
+        "issues": "https://github.com/libsPHP/wp-translation/issues",
+        "source": "https://github.com/libsPHP/wp-translation",
         "docs": "https://nativemind.net/docs/wp-translation",
         "email": "support@nativemind.net"
     },
